@@ -4,12 +4,10 @@ const mongoose=require('mongoose');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const cors=require('cors');
-const path=require('path');
 const app=express();
 app.use(cors());
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, "frontend")));
 const PORT=process.env.PORT||5000, JWT_SECRET=process.env.JWT_SECRET||'dev-secret-change-me';
 
 const userSchema=new mongoose.Schema({name:{type:String,required:true,trim:true},username:{type:String,required:true,unique:true,lowercase:true,trim:true},password:{type:String,required:true},role:{type:String,enum:['admin','teacher','student'],required:true},studentId:{type:mongoose.Schema.Types.ObjectId,ref:'Student',default:null}},{timestamps:true});
@@ -51,7 +49,7 @@ app.get('/api/reports',auth,async(req,res)=>{const students=await Student.find()
 app.get('/api/settings',auth,async(req,res)=>{const x=await Setting.findOne({key:'school'});res.json(x||{schoolName:'Naitik Public School',location:'Birja'})});
 app.put('/api/settings',auth,roles('admin'),async(req,res)=>{const x=await Setting.findOneAndUpdate({key:'school'},{key:'school',schoolName:req.body.schoolName||'Naitik Public School',location:req.body.location||'Birja'},{upsert:true,new:true});res.json(x)});
 
-app.get('*',(req,res)=>res.sendFile(path.join(__dirname,'frontend')));
+
 mongoose.connect(
   process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/naitik_public_school'
 )

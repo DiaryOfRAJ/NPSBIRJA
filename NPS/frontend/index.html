@@ -1,0 +1,419 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Naitik Public School Birja</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial;background:#f1f5f9;color:#0f172a}button,input,select{font:inherit}button{cursor:pointer}
+#login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#0f172a,#1d4ed8);padding:20px}.box{background:white;padding:28px;border-radius:20px;width:min(420px,100%);box-shadow:0 25px 70px #0004}.brand{text-align:center;margin-bottom:20px}.logo{margin:auto auto 10px;width:58px;height:58px;border-radius:16px;background:#2563eb;color:#fff;display:grid;place-items:center;font-weight:800}.brand h1{margin:0;font-size:23px}.brand p{margin:4px;color:#64748b;font-size:12px}.box label{display:block;font-size:12px;font-weight:700;margin:12px 0 6px}.box input,.box select,.field input,.field select{width:100%;padding:11px;border:1px solid #dbe3ef;border-radius:9px}.primary{background:#2563eb;color:white;border:0;padding:10px 15px;border-radius:9px;font-weight:700}.light{background:#fff;border:1px solid #dbe3ef;padding:10px 15px;border-radius:9px}.danger{background:#fee2e2;color:#991b1b;border:0;padding:8px 10px;border-radius:8px}.error{color:#dc2626;font-size:12px;text-align:center;min-height:18px;margin-top:8px}.hint{background:#f8fafc;padding:10px;border-radius:9px;margin-top:15px;font-size:11px;color:#64748b}
+
+:root{--blue:#2563eb;--blue2:#1d4ed8;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0}
+#login{min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden;background:radial-gradient(circle at 12% 18%,#60a5fa66,transparent 28%),radial-gradient(circle at 88% 82%,#a78bfa55,transparent 30%),linear-gradient(135deg,#030712 0%,#0b1930 44%,#173b82 100%);padding:24px}
+#login:before{content:"";position:absolute;width:620px;height:620px;border:1px solid #ffffff16;border-radius:50%;top:-330px;right:-170px;box-shadow:0 0 0 75px #ffffff05,0 0 0 150px #ffffff03,0 0 0 225px #ffffff02;animation:loginFloat 12s ease-in-out infinite alternate}
+#login:after{content:"";position:absolute;width:460px;height:460px;border:1px solid #ffffff12;border-radius:50%;bottom:-300px;left:-180px;box-shadow:0 0 0 65px #ffffff04,0 0 0 130px #ffffff02;animation:loginFloat 10s ease-in-out infinite alternate-reverse}
+.login-shell{position:relative;z-index:1;width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;min-height:600px;background:#ffffff0c;border:1px solid #ffffff25;border-radius:32px;padding:9px;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 40px 110px #0008,0 0 0 1px #ffffff08;animation:loginIn .7s cubic-bezier(.2,.8,.2,1) both}
+.login-visual{border-radius:25px;padding:46px 42px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#2563eb 0%,#1d4ed8 48%,#172554 100%);position:relative;overflow:hidden;isolation:isolate}
+.login-visual:before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-170px;top:-145px;background:#ffffff0b;border:1px solid #ffffff18;box-shadow:0 0 0 50px #ffffff03;z-index:-1}
+.login-visual:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;left:-135px;bottom:-145px;background:#60a5fa20;border:1px solid #ffffff12;z-index:-1}
+.visual-top{position:relative;z-index:2}.school-badge{width:78px;height:78px;border-radius:24px;display:grid;place-items:center;background:#fff;color:var(--blue2);font-size:21px;font-weight:950;letter-spacing:1px;box-shadow:0 18px 40px #071a4a66;margin-bottom:30px;position:relative;animation:badgePulse 3s ease-in-out infinite}
+.school-badge:after{content:"";position:absolute;inset:-7px;border:1px solid #ffffff35;border-radius:28px}
+.login-visual h2{font-size:36px;line-height:1.08;margin:0 0 14px;letter-spacing:-1.1px}.login-visual p{margin:0;color:#dbeafe;line-height:1.7;font-size:14px;max-width:340px}
+.visual-bottom{position:relative;z-index:2;display:grid;gap:11px}.secure-note{display:flex;align-items:center;gap:10px;font-size:12px;color:#dbeafe}.secure-dot{width:8px;height:8px;border-radius:50%;background:#86efac;box-shadow:0 0 0 5px #86efac18,0 0 18px #86efac;animation:dotPulse 2s infinite}
+.login-card{background:#fff;border-radius:25px;padding:42px 42px 30px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 12px 40px #02061716;animation:cardIn .8s .08s both}
+.brand-mobile{display:none}.login-head{margin-bottom:22px}.login-head h1{margin:0;font-size:27px;letter-spacing:-.6px;color:var(--ink)}.login-head p{margin:8px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;background:#f1f5f9;padding:5px;border-radius:14px;margin-bottom:22px;border:1px solid #e8eef6}.tab{border:0;background:transparent;color:#64748b;padding:11px 7px;border-radius:10px;font-size:11px;font-weight:850;transition:all .25s ease;position:relative;overflow:hidden}.tab:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#fff9,transparent);transform:translateX(-120%);transition:.45s}.tab:hover:before{transform:translateX(120%)}.tab:hover{color:#1e3a8a;transform:translateY(-1px)}.tab.active{background:#fff;color:#1d4ed8;box-shadow:0 5px 16px #0f172a12,0 0 0 1px #dbeafe;transform:translateY(-1px)}
+#authForm{display:grid;gap:0}.box label{display:block;font-size:11px;font-weight:850;margin:13px 0 7px;color:#334155;text-transform:uppercase;letter-spacing:.55px}.input-wrap{position:relative}.box input,.box select,.field input,.field select{width:100%;padding:13px 14px;border:1px solid #dbe3ef;border-radius:12px;background:#f8fafc;color:#0f172a;outline:none;transition:all .22s ease;box-shadow:inset 0 1px 1px #0f172a06}.box input:hover,.box select:hover{border-color:#bfdbfe;background:#fff}.box input:focus,.box select:focus{border-color:#3b82f6;background:#fff;box-shadow:0 0 0 4px #2563eb14,0 6px 18px #2563eb0d;transform:translateY(-1px)}.box input::placeholder{color:#94a3b8}.password-wrap{position:relative}.password-wrap input{padding-right:48px}.pass-toggle{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:#64748b;padding:8px;border-radius:8px;transition:.2s}.pass-toggle:hover{background:#eef2ff;color:#2563eb;transform:translateY(-50%) scale(1.06)}
+.primary{background:linear-gradient(135deg,#2563eb,#1d4ed8 65%,#1e40af);color:white;border:0;padding:13px 15px;border-radius:12px;font-weight:850;box-shadow:0 10px 24px #2563eb35;transition:all .25s ease;position:relative;overflow:hidden}.primary:before{content:"";position:absolute;top:0;left:-100%;width:55%;height:100%;background:linear-gradient(100deg,transparent,#ffffff45,transparent);transform:skewX(-20deg);transition:.55s}.primary:hover:before{left:140%}.primary:hover{transform:translateY(-2px);box-shadow:0 15px 30px #2563eb40}.primary:active{transform:translateY(0);box-shadow:0 7px 15px #2563eb30}
+.error{color:#dc2626;font-size:12px;text-align:center;min-height:18px;margin-top:10px}.hint{display:flex;gap:9px;align-items:flex-start;background:#f8fafc;border:1px solid #eef2f7;padding:11px 12px;border-radius:11px;margin-top:15px;font-size:11px;color:#64748b;line-height:1.5}.hint:before{content:"i";width:17px;height:17px;flex:0 0 17px;border-radius:50%;display:grid;place-items:center;background:#dbeafe;color:#1d4ed8;font-weight:900}.login-footer{text-align:center;color:#94a3b8;font-size:10px;margin-top:18px}
+@keyframes loginIn{from{opacity:0;transform:translateY(22px) scale(.985)}to{opacity:1;transform:none}}@keyframes cardIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}@keyframes badgePulse{0%,100%{transform:translateY(0);box-shadow:0 18px 40px #071a4a66}50%{transform:translateY(-5px);box-shadow:0 24px 46px #071a4a7a}}@keyframes dotPulse{0%,100%{opacity:1}50%{opacity:.55}}@keyframes loginFloat{to{transform:translate3d(0,18px,0) rotate(3deg)}}
+@media(max-width:800px){#login{padding:16px}.login-shell{grid-template-columns:1fr;min-height:0;max-width:500px}.login-visual{display:none}.login-card{border-radius:24px;padding:34px 28px 26px}.brand-mobile{display:grid;place-items:center;margin-bottom:18px}.brand-mobile .logo{width:64px;height:64px;border-radius:20px;background:linear-gradient(145deg,#2563eb,#1d4ed8);color:#fff;display:grid;place-items:center;font-weight:900;box-shadow:0 12px 28px #2563eb35}.login-head{text-align:center}}
+@media(max-width:420px){#login{padding:10px}.login-card{padding:28px 20px 22px}.login-head h1{font-size:24px}.tabs{gap:4px}.tab{font-size:10px;padding:10px 4px}}
+#app{display:none}.side{position:fixed;inset:0 auto 0 0;width:250px;background:#0f172a;color:white;padding:20px 10px;z-index:5}.side h2{font-size:18px;margin:0 8px}.side small{color:#94a3b8;margin:4px 8px;display:block}.nav{margin-top:20px}.nav button{width:100%;background:transparent;color:#cbd5e1;border:0;text-align:left;padding:12px;border-radius:9px;margin:3px 0}.nav button:hover,.nav button.active{background:#1d4ed8;color:#fff}
+.main{margin-left:250px}.top{height:70px;background:white;border-bottom:1px solid #e2e8f0;padding:0 25px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:3}.who{display:flex;align-items:center;gap:8px;font-size:12px}.avatar{width:34px;height:34px;border-radius:50%;background:#dbeafe;color:#1d4ed8;display:grid;place-items:center;font-weight:800}.logout{border:1px solid #e2e8f0;background:white;border-radius:8px;padding:7px 10px}.content{padding:24px;max-width:1450px;margin:auto}.page{display:none}.page.on{display:block}.head{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.head h1{font-size:23px;margin:0}.head p{color:#64748b;font-size:13px}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:18px}.card{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:17px;box-shadow:0 7px 22px #0f172a0a}.card h3{margin:0 0 12px;font-size:16px}.num{font-size:28px;font-weight:800}.muted{color:#64748b;font-size:12px}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}.toolbar input,.toolbar select{padding:10px;border:1px solid #dbe3ef;border-radius:9px;background:white}.search{flex:1;min-width:200px}.search input{width:100%}.table{overflow:auto;background:white;border:1px solid #e2e8f0;border-radius:14px}.table table{width:100%;border-collapse:collapse;min-width:700px}.table th,.table td{padding:11px 13px;border-bottom:1px solid #e2e8f0;text-align:left;font-size:13px}.table th{background:#f8fafc;color:#475569}.badge{padding:4px 8px;border-radius:99px;font-size:11px;font-weight:700}.green{background:#dcfce7;color:#166534}.orange{background:#ffedd5;color:#9a3412}.red{background:#fee2e2;color:#991b1b}.modal{display:none;position:fixed;inset:0;background:#0f172a88;z-index:10;place-items:center;padding:18px}.modal.show{display:grid}.modalbox{background:white;border-radius:15px;width:min(650px,100%);max-height:90vh;overflow:auto}.modalhead{padding:17px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between}.modalbody{padding:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.field label{display:block;font-size:11px;font-weight:700;margin-bottom:5px;color:#475569}.full{grid-column:1/-1}.modalfoot{padding:14px 18px;border-top:1px solid #e2e8f0;text-align:right}.att{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.attitem{background:#fff;border:1px solid #e2e8f0;border-radius:11px;padding:12px;display:flex;justify-content:space-between;align-items:center}.attitem small{display:block;color:#64748b}.attitem button{padding:6px;border:1px solid #dbe3ef;background:#fff;border-radius:7px;font-size:11px}.selp{background:#dcfce7!important}.sela{background:#fee2e2!important}.sell{background:#ffedd5!important}.empty{text-align:center;color:#64748b;padding:30px}
+@media(max-width:800px){.side{transform:translateX(-100%);transition:.2s}.side.open{transform:none}.main{margin-left:0}.cards{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.full{grid-column:auto}.att{grid-template-columns:1fr}.menu{display:block!important}.top{padding:0 14px}.content{padding:15px}}
+@media(max-width:450px){.cards{grid-template-columns:1fr}}
+.menu{display:none;border:0;background:#eef2ff;padding:8px;border-radius:8px}
+
+/* FINAL LOGIN UI OVERRIDE — login page only */
+#login{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  position:relative;
+  overflow:hidden;
+  padding:18px;
+  background:
+    radial-gradient(circle at 8% 15%,rgba(96,165,250,.18),transparent 28%),
+    radial-gradient(circle at 92% 88%,rgba(129,140,248,.20),transparent 30%),
+    linear-gradient(135deg,#071426 0%,#0b1b31 45%,#1e3a8a 100%);
+}
+#login:before{
+  width:650px;height:650px;top:-360px;right:-210px;
+  border-color:rgba(255,255,255,.12);
+  box-shadow:0 0 0 75px rgba(255,255,255,.035),0 0 0 150px rgba(255,255,255,.018);
+}
+#login:after{
+  width:520px;height:520px;bottom:-355px;left:-220px;
+  border-color:rgba(255,255,255,.10);
+  box-shadow:0 0 0 70px rgba(255,255,255,.025);
+}
+.login-shell{
+  width:min(1180px,100%);
+  min-height:700px;
+  grid-template-columns:1.04fr .96fr;
+  padding:12px;
+  gap:0;
+  border-radius:32px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.20);
+  box-shadow:0 35px 100px rgba(0,0,0,.42),0 0 0 1px rgba(255,255,255,.04);
+}
+.login-visual{
+  min-height:676px;
+  border-radius:24px;
+  padding:54px 52px 46px;
+  background:
+    radial-gradient(circle at 70% 25%,rgba(96,165,250,.25),transparent 30%),
+    linear-gradient(145deg,#1d4ed8 0%,#1644c2 48%,#162b72 100%);
+}
+.school-badge{
+  width:98px;height:98px;border-radius:29px;
+  font-size:27px;
+  background:#fff;
+  color:#2148a3;
+  box-shadow:0 18px 42px rgba(4,20,70,.32);
+  margin-bottom:40px;
+}
+.login-visual h2{
+  font-size:46px;
+  line-height:1.08;
+  letter-spacing:-1.7px;
+  margin-bottom:18px;
+}
+.login-visual p{
+  font-size:17px;
+  max-width:470px;
+  color:#dbeafe;
+}
+.visual-bottom{gap:15px;margin-top:auto}
+.secure-note{font-size:14px}
+.login-card{
+  border-radius:24px;
+  padding:30px 52px 25px;
+  background:linear-gradient(145deg,#fdfdfd 0%,#f5f7fa 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 15px 45px rgba(2,6,23,.10);
+}
+.brand-mobile{display:none}
+.auth-switch{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  margin:0 auto 28px;
+}
+.auth-switch-btn{
+  min-width:112px;
+  border:0;
+  border-radius:999px;
+  padding:11px 24px;
+  background:#e9eef5;
+  color:#34475d;
+  font-weight:850;
+  font-size:14px;
+  box-shadow:7px 7px 15px rgba(148,163,184,.28),-5px -5px 12px rgba(255,255,255,.95);
+  transition:transform .22s ease,box-shadow .22s ease,background .22s ease,color .22s ease;
+}
+.auth-switch-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:9px 10px 20px rgba(148,163,184,.32),-5px -5px 13px rgba(255,255,255,.98);
+}
+.auth-switch-btn.active{
+  color:#fff;
+  background:linear-gradient(135deg,#9c22b8,#bd39cf);
+  box-shadow:7px 8px 18px rgba(168,45,193,.35),inset 0 1px 0 rgba(255,255,255,.22);
+}
+.login-head{margin-bottom:20px}
+.login-head h1{
+  font-size:32px;
+  color:#26384d;
+  letter-spacing:-.8px;
+}
+.login-head p{
+  margin-top:6px;
+  color:#6b7c91;
+  font-size:13px;
+}
+.tabs{
+  background:transparent;
+  padding:0;
+  border:0;
+  gap:8px;
+  margin-bottom:18px;
+}
+.tab{
+  background:#e9eef4;
+  color:#42566b;
+  border-radius:999px;
+  padding:10px 8px;
+  font-size:12px;
+  box-shadow:6px 6px 13px rgba(148,163,184,.22),-4px -4px 10px rgba(255,255,255,.95);
+}
+.tab:hover{color:#24384d;transform:translateY(-1px)}
+.tab.active{
+  background:linear-gradient(135deg,#9c22b8,#bb36ca);
+  color:#fff;
+  box-shadow:5px 7px 15px rgba(168,45,193,.30);
+}
+#authForm{gap:0}
+.box label{
+  font-size:14px;
+  font-weight:800;
+  text-transform:none;
+  letter-spacing:0;
+  margin:10px 0 7px;
+  color:#3a4e63;
+}
+.input-wrap{position:relative}
+.box input,.box select{
+  padding:13px 15px;
+  min-height:47px;
+  border:1px solid #d5dde7;
+  border-radius:15px;
+  background:#edf1f6;
+  color:#26384d;
+  box-shadow:
+    inset 6px 6px 12px rgba(148,163,184,.20),
+    inset -6px -6px 12px rgba(255,255,255,.95);
+  transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease,background .22s ease;
+}
+.box input:hover,.box select:hover{
+  background:#f1f4f8;
+  border-color:#c3cedb;
+  transform:translateY(-1px);
+}
+.box input:focus,.box select:focus{
+  border-color:#b23cc4;
+  background:#f4f6f9;
+  box-shadow:
+    inset 4px 4px 9px rgba(148,163,184,.14),
+    inset -4px -4px 9px rgba(255,255,255,.95),
+    0 0 0 3px rgba(177,57,196,.12),
+    0 8px 20px rgba(177,57,196,.10);
+  transform:translateY(-1px);
+}
+.box input::placeholder{color:#8793a0}
+.password-wrap input{padding-right:52px}
+.pass-toggle{
+  right:8px;
+  color:#718197;
+  background:#e7edf4;
+  box-shadow:2px 2px 6px rgba(148,163,184,.22),-2px -2px 5px rgba(255,255,255,.9);
+}
+.pass-toggle:hover{
+  color:#a22abb;
+  background:#eef0f5;
+  transform:translateY(-50%) scale(1.06);
+}
+.primary{
+  margin-top:12px !important;
+  min-height:50px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#a523bb,#bc36cb);
+  box-shadow:8px 10px 22px rgba(168,45,193,.30),inset 0 1px 0 rgba(255,255,255,.20);
+  font-size:16px;
+}
+.primary:hover{
+  box-shadow:10px 13px 28px rgba(168,45,193,.38);
+}
+.hint{
+  margin-top:15px;
+  border:0;
+  border-radius:14px;
+  background:#eef2f6;
+  color:#526477;
+  box-shadow:inset 4px 4px 9px rgba(148,163,184,.13),inset -4px -4px 9px rgba(255,255,255,.90);
+}
+.login-footer{margin-top:16px;color:#7c8998;font-size:10px}
+@media(max-width:800px){
+  #login{padding:10px}
+  .login-shell{grid-template-columns:1fr;min-height:0;padding:8px}
+  .login-visual{display:none}
+  .login-card{padding:28px 24px 22px}
+  .login-head{text-align:center}
+  .login-head h1{font-size:27px}
+}
+@media(max-width:450px){
+  .auth-switch{gap:9px;margin-bottom:22px}
+  .auth-switch-btn{min-width:102px;padding:10px 18px}
+  .tabs{gap:6px}
+  .tab{font-size:10px;padding:9px 4px}
+  .login-card{padding:24px 17px 19px}
+  .box input,.box select{min-height:45px}
+}
+
+
+/* INPUT ALIGNMENT FIX — login page only */
+.login-card label{
+  display:block;
+  width:100%;
+  font-size:14px;
+  font-weight:800;
+  text-transform:none;
+  letter-spacing:0;
+  margin:10px 0 7px;
+  color:#3a4e63;
+}
+.login-card input,
+.login-card select{
+  display:block;
+  width:100%;
+  min-width:0;
+  min-height:47px;
+  padding:13px 15px;
+  border:1px solid #d5dde7;
+  border-radius:15px;
+  background:#edf1f6;
+  color:#26384d;
+  outline:none;
+  box-sizing:border-box;
+  box-shadow:
+    inset 6px 6px 12px rgba(148,163,184,.20),
+    inset -6px -6px 12px rgba(255,255,255,.95);
+  transition:border-color .22s ease,box-shadow .22s ease,transform .22s ease,background .22s ease;
+}
+.login-card .password-wrap{
+  position:relative;
+  width:100%;
+}
+.login-card .password-wrap input{
+  width:100%;
+  padding-right:52px;
+}
+.login-card .input-wrap{
+  position:relative;
+  width:100%;
+}
+.login-card input:hover,
+.login-card select:hover{
+  background:#f1f4f8;
+  border-color:#c3cedb;
+  transform:translateY(-1px);
+}
+.login-card input:focus,
+.login-card select:focus{
+  border-color:#b23cc4;
+  background:#f4f6f9;
+  box-shadow:
+    inset 4px 4px 9px rgba(148,163,184,.14),
+    inset -4px -4px 9px rgba(255,255,255,.95),
+    0 0 0 3px rgba(177,57,196,.12),
+    0 8px 20px rgba(177,57,196,.10);
+  transform:translateY(-1px);
+}
+.login-card input::placeholder{color:#8793a0}
+@media(max-width:450px){
+  .login-card input,.login-card select{min-height:45px}
+}
+
+</style></head><body>
+<div id="login">
+<div class="login-shell">
+  <section class="login-visual">
+    <div class="visual-top">
+      <div class="school-badge">NPS</div>
+      <h2>Naitik Public School</h2>
+      <p>Smart, simple and secure school management for Birja.</p>
+    </div>
+    <div class="visual-bottom">
+      <div class="secure-note"><span class="secure-dot"></span> Secure school management portal</div>
+      <div class="secure-note">Birja • Academic &amp; Administration</div>
+    </div>
+  </section>
+  <section class="login-card">
+    <div class="brand-mobile"><div class="logo">NPS</div></div>
+    <div class="auth-switch" aria-label="Authentication mode">
+      <button type="button" class="auth-switch-btn" id="switchSignIn">Sign In</button>
+      <button type="button" class="auth-switch-btn active" id="switchSignUp">Sign Up</button>
+    </div>
+    <div class="login-head"><h1 id="loginTitle">Create administrator account</h1><p id="loginSubtitle">Set up the first admin account for your school.</p></div>
+    <div class="tabs"><button type="button" class="tab active" data-mode="adminSignup">Admin Signup</button><button type="button" class="tab" data-mode="adminLogin">Admin Login</button><button type="button" class="tab" data-mode="teacherLogin">Teacher Login</button><button type="button" class="tab" data-mode="studentLogin">Student Login</button></div>
+    <form id="authForm">
+      <div id="nameWrap"><label>Admin Name</label><input id="name" autocomplete="name" placeholder="Enter admin name"></div>
+      <label>Username</label><input id="username" autocomplete="username" placeholder="Enter username" required>
+      <label>Password</label><div class="password-wrap"><input id="password" type="password" autocomplete="current-password" placeholder="Enter password" required><button type="button" class="pass-toggle" id="passToggle" aria-label="Show password">◉</button></div>
+      <div id="authError" class="error"></div>
+      <button class="primary" style="width:100%;margin-top:8px" id="authBtn">Create Admin Account</button>
+    </form>
+    <div class="hint" id="authHint">Admin signup is available only when no Admin account exists. After the first Admin is created, Admin signup automatically closes.</div>
+    <div class="login-footer">© <span id="loginYear"></span> Naitik Public School, Birja</div>
+  </section>
+</div>
+</div>
+<div id="app"><aside class="side" id="side"><h2>NAITIK PUBLIC SCHOOL</h2><small>Birja • Management</small><div class="nav" id="nav"><button data-p="dashboard">▦ Dashboard</button><button data-p="students">🎓 Students</button><button data-p="teachers">👨‍🏫 Teachers</button><button data-p="attendance">✓ Attendance</button><button data-p="fees">₹ Fees</button><button data-p="reports">▤ Reports</button><button data-p="settings">⚙ Settings</button><button data-p="profile">👤 My Profile</button></div></aside>
+<main class="main"><header class="top"><div style="display:flex;gap:10px;align-items:center"><button class="menu" id="menu">☰</button><b id="title">Dashboard</b></div><div class="who"><div class="avatar" id="avatar">AD</div><span id="whoText"></span><button class="logout" onclick="logout()">Logout</button></div></header><div class="content">
+<section class="page" id="dashboard"><div class="head"><div><h1>Dashboard</h1><p>School overview</p></div></div><div class="cards"><div class="card"><span class="muted">Students</span><div class="num" id="dStudents">0</div></div><div class="card"><span class="muted">Teachers</span><div class="num" id="dTeachers">0</div></div><div class="card"><span class="muted">Present Today</span><div class="num" id="dPresent">0</div></div><div class="card"><span class="muted">Fee Due</span><div class="num" id="dDue">₹0</div></div></div><div class="card"><h3>Attendance Today</h3><div id="dAtt" class="muted">Loading...</div></div></section>
+<section class="page" id="students"><div class="head"><div><h1>Students</h1><p>Only Admin can register, edit or delete students.</p></div><button class="primary adminOnly" onclick="studentModal()">＋ Add Student</button></div><div class="toolbar"><div class="search"><input id="sq" placeholder="Search..." oninput="renderStudents()"></div></div><div class="table" id="studentTable"></div></section>
+<section class="page" id="teachers"><div class="head"><div><h1>Teachers</h1><p>Only Admin can register, edit or delete teachers.</p></div><button class="primary adminOnly" onclick="teacherModal()">＋ Add Teacher</button></div><div class="table" id="teacherTable"></div></section>
+<section class="page" id="attendance"><div class="head"><div><h1>Attendance</h1><p>Admin and Teacher can mark attendance.</p></div><button class="primary staffOnly" onclick="saveAtt()">✓ Save Attendance</button></div><div class="toolbar"><input type="date" id="attDate" onchange="renderAttendance()"></div><div class="att" id="attList"></div></section>
+<section class="page" id="fees"><div class="head"><div><h1>Fees</h1><p>Admin and Teacher can update fee records.</p></div><button class="primary staffOnly" onclick="feeModal()">＋ Record Payment</button></div><div class="table" id="feeTable"></div></section>
+<section class="page" id="reports"><div class="head"><div><h1>Reports</h1><p>School reports</p></div></div><div class="table" id="reportTable"></div></section>
+<section class="page" id="settings"><div class="head"><div><h1>Settings</h1><p>Admin-only school settings.</p></div></div><div class="card"><div class="grid"><div class="field"><label>School Name</label><input id="schoolName" value="Naitik Public School"></div><div class="field"><label>Location</label><input id="schoolLoc" value="Birja"></div></div><button class="primary adminOnly" style="margin-top:14px" onclick="saveSettings()">Save Settings</button></div></section>
+<section class="page" id="profile"><div class="head"><div><h1>My Profile</h1><p>Logged-in account</p></div></div><div class="card" id="profileBox"></div></section>
+</div></main></div>
+
+<div class="modal" id="modal"><div class="modalbox"><div class="modalhead"><b id="modalTitle"></b><button class="light" onclick="closeModal()">✕</button></div><div class="modalbody" id="modalBody"></div><div class="modalfoot"><button class="light" onclick="closeModal()">Cancel</button> <button class="primary" id="modalSave">Save</button></div></div></div>
+<script>
+let token=localStorage.getItem("nps_token"),me=JSON.parse(localStorage.getItem("nps_me")||"null"),cache={students:[],teachers:[],fees:[]};
+const $=id=>document.getElementById(id), today=()=>new Date().toISOString().slice(0,10), money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(n||0), esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+async function api(url,opt={}){opt.headers={...(opt.headers||{}),Authorization:"Bearer "+token,"Content-Type":"application/json"};const r=await fetch(url,opt),d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||"Request failed");return d}
+function logout(){localStorage.removeItem("nps_token");localStorage.removeItem("nps_me");location.reload()}
+let authMode="adminSignup";
+function setAuthMode(mode){
+  authMode=mode; document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
+  $("switchSignUp").classList.toggle("active",mode==="adminSignup");
+  $("switchSignIn").classList.toggle("active",mode!=="adminSignup");
+  const signup=mode==="adminSignup"; $("nameWrap").style.display=signup?"block":"none";
+  $("authBtn").textContent=signup?"Create Admin Account":"Login";
+  $("loginTitle").textContent=signup?"Create administrator account":"Welcome back";
+  $("loginSubtitle").textContent=signup?"Set up the first admin account for your school.":mode==="adminLogin"?"Sign in to manage your school.":mode==="teacherLogin"?"Sign in with the account provided by Admin.":"Sign in with the account provided by your school.";
+  $("authHint").textContent=signup?"Admin signup is available only when no Admin account exists. After the first Admin is created, Admin signup automatically closes.":mode==="teacherLogin"?"Teacher accounts are created by Admin. Use the username and password provided by the school.":"Student accounts are created by Admin. Use the username and password provided by the school.";
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>setAuthMode(b.dataset.mode));
+$("switchSignIn").onclick=()=>setAuthMode("adminLogin");
+$("switchSignUp").onclick=()=>setAuthMode("adminSignup");
+$("authForm").onsubmit=async e=>{
+ e.preventDefault();$("authError").textContent="";
+ try{
+   let d;
+   if(authMode==="adminSignup"){
+     d=await fetch("/api/admin/signup",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:$("name").value.trim(),username:$("username").value.trim(),password:$("password").value})}).then(async r=>{const x=await r.json();if(!r.ok)throw Error(x.error);return x});
+   }else{
+     const role=authMode==="adminLogin"?"admin":authMode==="teacherLogin"?"teacher":"student";
+     d=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({role,username:$("username").value.trim(),password:$("password").value})}).then(async r=>{const x=await r.json();if(!r.ok)throw Error(x.error);return x});
+   }
+   token=d.token;me=d.user;localStorage.setItem("nps_token",token);localStorage.setItem("nps_me",JSON.stringify(me));start();
+ }catch(e){$("authError").textContent=e.message}
+};
+setAuthMode("adminSignup");
+$("loginYear").textContent=new Date().getFullYear();
+$("passToggle").onclick=()=>{const p=$("password"),show=p.type==="password";p.type=show?"text":"password";$("passToggle").textContent=show?"◉":"◌";$("passToggle").setAttribute("aria-label",show?"Hide password":"Show password")};
+$("menu").onclick=()=>$("side").classList.toggle("open");
+$("nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;show(b.dataset.p)};
+function show(p){document.querySelectorAll(".page").forEach(x=>x.classList.remove("on"));$(p).classList.add("on");$("title").textContent=p[0].toUpperCase()+p.slice(1);$("side").classList.remove("open"); if(p==="dashboard")dashboard();if(p==="students")renderStudents();if(p==="teachers")renderTeachers();if(p==="attendance")renderAttendance();if(p==="fees")renderFees();if(p==="reports")renderReports();if(p==="settings")loadSettings();if(p==="profile")profile()}
+function start(){if(!token||!me){$("login").style.display="grid";return}$("login").style.display="none";$("app").style.display="block";$("whoText").textContent=me.name+" • "+me.role;$("avatar").textContent=me.name.slice(0,2).toUpperCase();document.querySelectorAll(".adminOnly").forEach(x=>x.style.display=me.role==="admin"?"inline-flex":"none");document.querySelectorAll(".staffOnly").forEach(x=>x.style.display=["admin","teacher"].includes(me.role)?"inline-flex":"none");let allowed=me.role==="admin"?["dashboard","students","teachers","attendance","fees","reports","settings","profile"]:me.role==="teacher"?["attendance","fees","students","teachers","reports","profile"]:["profile","fees","attendance"];document.querySelectorAll("#nav button").forEach(b=>b.style.display=allowed.includes(b.dataset.p)?"block":"none");show(me.role==="admin"?"dashboard":me.role==="teacher"?"attendance":"profile")}
+async function dashboard(){try{const d=await api("/api/dashboard");$("dStudents").textContent=d.students;$("dTeachers").textContent=d.teachers;$("dPresent").textContent=d.present;$("dDue").textContent=money(d.feeDue);$("dAtt").textContent=`Present: ${d.present} • Absent: ${d.absent} • Leave: ${d.leave} • Collection: ${money(d.feePaid)}`}catch(e){$("dAtt").textContent=e.message}}
+async function renderStudents(){try{cache.students=await api("/api/students");const q=($("sq").value||"").toLowerCase();let a=cache.students.filter(s=>[s.name,s.roll,s.className,s.guardian].join(" ").toLowerCase().includes(q));$("studentTable").innerHTML=`<table><thead><tr><th>Roll</th><th>Name</th><th>Class</th><th>Guardian</th><th>Phone</th><th>Actions</th></tr></thead><tbody>${a.map(s=>`<tr><td>${esc(s.roll)}</td><td><b>${esc(s.name)}</b><br><small>${esc(s.username)}</small></td><td>${esc(s.className)}</td><td>${esc(s.guardian||"-")}</td><td>${esc(s.phone||"-")}</td><td>${me.role==="admin"?`<button class="light" onclick="studentModal('${s._id}')">Edit</button> <button class="danger" onclick="delStudent('${s._id}')">Delete</button>`:"View only"}</td></tr>`).join("")||'<tr><td colspan="6" class="empty">No students</td></tr>'}</tbody></table>`}catch(e){$("studentTable").innerHTML=e.message}}
+function studentModal(id=""){const s=cache.students.find(x=>x._id===id)||{};$("modalTitle").textContent=id?"Edit Student":"Register Student";$("modalBody").innerHTML=`<div class="grid"><div class="field"><label>Name *</label><input id="mName" value="${esc(s.name)}"></div><div class="field"><label>Roll No. *</label><input id="mRoll" value="${esc(s.roll)}"></div><div class="field"><label>Username *</label><input id="mUser" value="${esc(s.username)}"></div><div class="field"><label>${id?"New Password (optional)":"Password *"}</label><input id="mPass" type="password"></div><div class="field"><label>Class *</label><input id="mClass" value="${esc(s.className)}"></div><div class="field"><label>Section</label><input id="mSection" value="${esc(s.section)}"></div><div class="field"><label>Guardian</label><input id="mGuardian" value="${esc(s.guardian)}"></div><div class="field"><label>Phone</label><input id="mPhone" value="${esc(s.phone)}"></div><div class="field"><label>DOB</label><input id="mDob" type="date" value="${esc(s.dob)}"></div><div class="field"><label>Admission</label><input id="mAdmission" type="date" value="${esc(s.admission)}"></div></div>`;$("modal").classList.add("show");$("modalSave").onclick=async()=>{try{const d={name:$("mName").value,roll:$("mRoll").value,username:$("mUser").value,password:$("mPass").value,className:$("mClass").value,section:$("mSection").value,guardian:$("mGuardian").value,phone:$("mPhone").value,dob:$("mDob").value,admission:$("mAdmission").value};if(id&& !d.password)delete d.password;await api(id?"/api/students/"+id:"/api/students",{method:id?"PUT":"POST",body:JSON.stringify(d)});closeModal();renderStudents();toast(id?"Student updated":"Student registered") }catch(e){alert(e.message)}}}
+async function delStudent(id){if(!confirm("Delete this student and their login, fee and attendance records?"))return;try{await api("/api/students/"+id,{method:"DELETE"});renderStudents();toast("Student deleted")}catch(e){alert(e.message)}}
+async function renderTeachers(){try{cache.teachers=await api("/api/teachers");$("teacherTable").innerHTML=`<table><thead><tr><th>Name</th><th>Username</th><th>Subject</th><th>Phone</th><th>Email</th><th>Actions</th></tr></thead><tbody>${cache.teachers.map(t=>`<tr><td><b>${esc(t.name)}</b></td><td>${esc(t.username)}</td><td>${esc(t.subject)}</td><td>${esc(t.phone||"-")}</td><td>${esc(t.email||"-")}</td><td>${me.role==="admin"?`<button class="light" onclick="teacherModal('${t._id}')">Edit</button> <button class="danger" onclick="delTeacher('${t._id}')">Delete</button>`:"View only"}</td></tr>`).join("")||'<tr><td colspan="6" class="empty">No teachers</td></tr>'}</tbody></table>`}catch(e){$("teacherTable").innerHTML=e.message}}
+function teacherModal(id=""){const t=cache.teachers.find(x=>x._id===id)||{};$("modalTitle").textContent=id?"Edit Teacher":"Register Teacher";$("modalBody").innerHTML=`<div class="grid"><div class="field"><label>Name *</label><input id="mName" value="${esc(t.name)}"></div><div class="field"><label>Username *</label><input id="mUser" value="${esc(t.username)}"></div><div class="field"><label>${id?"New Password (optional)":"Password *"}</label><input id="mPass" type="password"></div><div class="field"><label>Subject *</label><input id="mSubject" value="${esc(t.subject)}"></div><div class="field"><label>Phone</label><input id="mPhone" value="${esc(t.phone)}"></div><div class="field"><label>Email</label><input id="mEmail" value="${esc(t.email)}"></div><div class="field"><label>Joining Date</label><input id="mJoining" type="date" value="${esc(t.joining)}"></div></div>`;$("modal").classList.add("show");$("modalSave").onclick=async()=>{try{const d={name:$("mName").value,username:$("mUser").value,password:$("mPass").value,subject:$("mSubject").value,phone:$("mPhone").value,email:$("mEmail").value,joining:$("mJoining").value};if(id&&!d.password)delete d.password;await api(id?"/api/teachers/"+id:"/api/teachers",{method:id?"PUT":"POST",body:JSON.stringify(d)});closeModal();renderTeachers();toast(id?"Teacher updated":"Teacher registered")}catch(e){alert(e.message)}}}
+async function delTeacher(id){if(!confirm("Delete teacher and their login?"))return;try{await api("/api/teachers/"+id,{method:"DELETE"});renderTeachers();toast("Teacher deleted")}catch(e){alert(e.message)}}
+async function renderAttendance(){try{const date=$("attDate").value||today();$("attDate").value=date;cache.students=await api("/api/students");const rows=await api("/api/attendance?date="+date),map=Object.fromEntries(rows.map(x=>[x.studentId._id||x.studentId,x.status]));$("attList").innerHTML=cache.students.map(s=>{let v=map[s._id]||"present";let disabled=me.role==="student";return `<div class="attitem"><div><b>${esc(s.name)}</b><small>Roll ${esc(s.roll)} • Class ${esc(s.className)}</small></div><div>${["present","absent","leave"].map(x=>`<button class="${v===x?"sel"+x[0]:""}" ${disabled?"disabled":""} onclick="setA('${s._id}','${x}')">${x[0].toUpperCase()}</button>`).join("")}</div></div>`}).join("")||'<div class="empty">No students</div>';window.attMap=map}catch(e){$("attList").innerHTML=e.message}}
+function setA(id,v){window.attMap[id]=v;renderAttendanceLocal()}
+function renderAttendanceLocal(){const buttons=document.querySelectorAll(".attitem");buttons.forEach(b=>{const id=b.querySelector("button").getAttribute("onclick").match(/'([^']+)'/)[1],v=window.attMap[id];b.querySelectorAll("button").forEach(x=>x.className="");const idx={present:0,absent:1,leave:2}[v];if(idx!==undefined)b.querySelectorAll("button")[idx].className="sel"+v[0]})}
+async function saveAtt(){try{await api("/api/attendance/bulk",{method:"POST",body:JSON.stringify({date:$("attDate").value,records:window.attMap})});toast("Attendance saved")}catch(e){alert(e.message)}}
+async function renderFees(){try{const a=await api("/api/fees");$("feeTable").innerHTML=`<table><thead><tr><th>Student</th><th>Class</th><th>Total</th><th>Paid</th><th>Due</th><th>Status</th><th>Action</th></tr></thead><tbody>${a.map(f=>{let due=Math.max(0,f.total-f.paid),st=f.paid>=f.total?"Paid":f.paid>0?"Partial":"Due";return `<tr><td>${esc(f.studentId.name)}</td><td>${esc(f.studentId.className)}</td><td>${money(f.total)}</td><td>${money(f.paid)}</td><td>${money(due)}</td><td><span class="badge ${st==="Paid"?"green":st==="Partial"?"orange":"red"}">${st}</span></td><td>${me.role==="student"?"View only":`<button class="light" onclick="feeModal('${f.studentId._id}',${f.total},${f.paid})">Edit</button>`}</td></tr>`}).join("")||'<tr><td colspan="7" class="empty">No fee records</td></tr>'}</tbody></table>`}catch(e){$("feeTable").innerHTML=e.message}}
+function feeModal(studentId="",total=0,paid=0){if(!cache.students.length)api("/api/students").then(x=>{cache.students=x;feeModal(studentId,total,paid)});$("modalTitle").textContent="Fee Payment";$("modalBody").innerHTML=`<div class="grid"><div class="field full"><label>Student</label><select id="mStudent">${cache.students.map(s=>`<option value="${s._id}" ${s._id===studentId?"selected":""}>${esc(s.name)} — ${esc(s.roll)}</option>`).join("")}</select></div><div class="field"><label>Total Fee</label><input id="mTotal" type="number" value="${total}"></div><div class="field"><label>Paid</label><input id="mPaid" type="number" value="${paid}"></div><div class="field"><label>Date</label><input id="mDate" type="date" value="${today()}"></div><div class="field"><label>Note</label><input id="mNote"></div></div>`;$("modal").classList.add("show");$("modalSave").onclick=async()=>{try{await api("/api/fees",{method:"POST",body:JSON.stringify({studentId:$("mStudent").value,total:Number($("mTotal").value),paid:Number($("mPaid").value),date:$("mDate").value,note:$("mNote").value})});closeModal();renderFees();toast("Fee saved")}catch(e){alert(e.message)}}}
+async function renderReports(){try{const a=await api("/api/reports");$("reportTable").innerHTML=`<table><thead><tr><th>Class</th><th>Students</th><th>Present</th><th>Attendance</th></tr></thead><tbody>${a.map(x=>`<tr><td>${esc(x.className)}</td><td>${x.students}</td><td>${x.present}</td><td>${x.rate}%</td></tr>`).join("")||'<tr><td colspan="4" class="empty">No report data</td></tr>'}</tbody></table>`}catch(e){$("reportTable").innerHTML=e.message}}
+async function loadSettings(){if(me.role!=="admin")return;try{const x=await api("/api/settings");$("schoolName").value=x.schoolName||"Naitik Public School";$("schoolLoc").value=x.location||"Birja"}catch(e){alert(e.message)}}
+async function saveSettings(){try{await api("/api/settings",{method:"PUT",body:JSON.stringify({schoolName:$("schoolName").value,location:$("schoolLoc").value})});toast("Settings saved")}catch(e){alert(e.message)}}
+function profile(){let extra=me.role==="student"?"Your student account is read-only outside your own records.":me.role==="teacher"?"You can manage attendance and fee records.":"You have full system administration access.";$("profileBox").innerHTML=`<h3>${esc(me.name)}</h3><p class="muted">Role: ${esc(me.role)}<br>Username: ${esc(me.username)}</p><p>${extra}</p>`}
+function closeModal(){$("modal").classList.remove("show")}
+function toast(x){alert(x)}
+$("attDate").value=today();start();
+</script></body></html>
